@@ -1,104 +1,393 @@
-/* CSS Variables for Theme Management */
+/* ===================================
+    KAVIA Dashboard: Custom CSS
+   =================================== */
+
+/* --- Theme Variables --- */
 :root {
-  /* Light theme colors */
+  /* Brand: KAVIA */
+  --primary: #3b82f6;
+  --secondary: #64748b;
+  --accent: #10b981;
+
+  /* Main Colors (light) */
   --bg-primary: #ffffff;
   --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
+  --text-primary: #222c36;
+  --text-secondary: #64748b;
   --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --button-bg: var(--primary);
+  --button-text: #fff;
+
+  --table-row-bg: #fcfcfc;
+  --table-row-hover: #e6eefb;
+  --table-header-bg: #f1f5fa;
+
+  --select-bg: #fff;
+  --select-border: #d9e2ec;
+  --input-bg: #fff;
+  --input-border: #d9e2ec;
+
+  --stat-bg: #f7fafc;
+  --footer-bg: #f8f9fa;
 }
 
+/* --- Dark Theme --- */
 [data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+  --bg-primary: #171923;
+  --bg-secondary: #232634;
+  --text-primary: #f9fafb;
+  --text-secondary: #c2c8d3;
+  --border-color: #35394b;
+  --button-bg: var(--secondary);
+  --button-text: #fff;
+
+  --table-row-bg: #232634;
+  --table-row-hover: #2c3144;
+  --table-header-bg: #22263a;
+
+  --select-bg: #21232e;
+  --select-border: #383e4f;
+  --input-bg: #21232e;
+  --input-border: #374151;
+
+  --stat-bg: #23283a;
+  --footer-bg: #171923;
 }
 
+/* --- Layout Containers --- */
 .App {
-  text-align: center;
-  background-color: var(--bg-primary);
+  min-height: 100vh;
+  background: var(--bg-primary);
   color: var(--text-primary);
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Inter', system-ui, sans-serif;
+  transition: background 0.25s, color 0.25s;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* --- Header --- */
+.kt-header {
+  padding: 32px 24px 10px 24px;
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  position: relative;
+  flex-wrap: wrap;
+  min-height: 56px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.kt-title-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  align-items: flex-start;
 }
 
-.App-link {
+.kt-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 2px;
+  letter-spacing: -1px;
+}
+
+.kt-subtitle {
+  font-size: 1rem;
+  font-weight: 400;
   color: var(--text-secondary);
-  transition: color 0.3s ease;
+  margin-left: 2px;
 }
 
 .theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
+  position: static;
+  background: var(--button-bg);
   color: var(--button-text);
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
+  border-radius: 10px;
+  padding: 10px 18px;
+  margin-left: auto;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  box-shadow: 0 1px 6px 0 rgba(30,40,50,0.09);
 }
-
 .theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px) scale(1.01);
+  opacity: 0.98;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.kt-stats {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  padding: 22px 0 10px 0;
+  background: var(--bg-primary);
+  flex-wrap: wrap;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.kt-stat {
+  background: var(--stat-bg);
+  border-radius: 11px;
+  padding: 14px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 1px 8px 0 rgba(200,218,232,0.07);
+  min-width: 120px;
+  margin: 4px;
+}
+.kt-stat-label {
+  font-size: .97em;
+  color: var(--text-secondary);
+}
+.kt-stat-value {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.kt-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 38px;
+  padding: 18px 18px 0 30px;
+  background: var(--bg-primary);
+  align-items: flex-end;
+  justify-content: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.kt-search {
+  font-size: 1rem;
+  flex: 1.12 0 220px;
+  min-width: 160px;
+  max-width: 340px;
+  padding: 10px 14px;
+  border-radius: 7px;
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  color: var(--text-primary);
+  outline: none;
+  margin-bottom: 8px;
+  transition: border 0.2s;
+}
+.kt-search:focus {
+  border-color: var(--primary);
+}
+
+.kt-selects {
+  display: flex;
+  gap: 8px;
+}
+.kt-select-label {
+  display: flex;
+  flex-direction: column;
+  font-size: .96em;
+  color: var(--text-secondary);
+  margin-right: 8px;
+}
+.kt-select {
+  min-width: 90px;
+  margin-top: 3px;
+  background: var(--select-bg);
+  border: 1.2px solid var(--select-border);
+  padding: 7px 8px 7px 16px;
+  border-radius: 6px;
+  font-size: 1.08em;
+  color: var(--text-primary);
+}
+
+.kt-date-range {
+  display: flex;
+  gap: 12px;
+  color: var(--text-secondary);
+  align-items: center;
+  font-size: 0.96em;
+}
+.kt-date-range input[type="date"] {
+  border: 1.2px solid var(--input-border);
+  border-radius: 6px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  padding: 5px 8px;
+  font-size: 1em;
+}
+
+.kt-table-area {
+  width: 100%;
+  overflow-x: auto;
+  padding: 18px 0 10px 0;
+}
+.kt-table {
+  width: 98%;
+  margin: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--bg-primary);
+  box-shadow: 0 1px 8px 0 rgba(200,230,255,0.06);
+  font-size: 1.03em;
+  border-radius: 9px;
+  min-width: 720px;
+}
+
+.kt-table th, .kt-table td {
+  padding: 11px 16px;
+  text-align: left;
+}
+
+.kt-table thead th {
+  background: var(--table-header-bg);
+  font-weight: 700;
+  color: var(--primary);
+  border-bottom: 2.5px solid var(--border-color);
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+}
+.kt-table thead th.sortable:hover, .kt-table thead th.sortable:focus {
+  background: #e7f0fa;
+  color: var(--accent);
+  outline: none;
+}
+
+.kt-table tr {
+  background: var(--table-row-bg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.16s;
+}
+.kt-table tbody tr:hover {
+  background: var(--table-row-hover);
+}
+
+.kt-table .kt-link {
+  color: var(--accent);
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.kt-table .kt-link:focus, .kt-table .kt-link:hover {
+  color: var(--primary);
+  text-decoration: underline wavy;
+}
+
+.kt-no-data, .kt-loading {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.2em;
+  padding: 36px 0 18px 0;
+  letter-spacing: 0.04em;
+}
+
+.kt-pagination {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 18px 0 4px 0;
+  justify-content: center;
+}
+.kt-pagination button {
+  background: none;
+  color: var(--primary);
+  border: 1.6px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1.09em;
+  padding: 4px 11px;
+  margin: 0 2px;
+  transition: background 0.18s, color 0.15s;
+  cursor: pointer;
+  font-weight: 500;
+  outline: none;
+}
+.kt-pagination button.active,
+.kt-pagination button:active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.kt-pagination button:disabled {
+  color: var(--border-color);
+  border-color: var(--border-color);
+  background: transparent;
+  cursor: not-allowed;
+}
+
+.kt-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--footer-bg);
+  padding: 12px 21px;
+  justify-content: flex-end;
+  border-top: 1.5px solid var(--border-color);
+}
+.kt-rows-per-page {
+  background: var(--select-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--select-border);
+  border-radius: 4px;
+  padding: 5.5px 12px;
+  margin-left: 8px;
+  font-size: 1em;
+}
+
+.kt-powered {
+  text-align: center;
+  font-size: 0.97em;
+  color: var(--text-secondary);
+  margin: 18px auto 0 auto;
+}
+.kt-powered a {
+  color: var(--accent);
+  transition: color 0.16s;
+  text-decoration: none;
+}
+.kt-powered a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+@media (max-width: 1000px) {
+  .kt-table {
+    min-width: 570px;
+    font-size: .98em;
   }
-  to {
-    transform: rotate(360deg);
+  .kt-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
   }
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+@media (max-width: 750px) {
+  .kt-header { padding: 18px 10px 8px 10px; }
+  .kt-title { font-size: 1.42rem; }
+  .kt-subtitle { font-size: .95em; }
+  .kt-controls { flex-direction: column; gap: 10px; padding-left: 10px;}
+  .kt-search { max-width: 100%; }
+  .kt-date-range { font-size: .95em; }
+  .kt-table { font-size: .96em; }
+}
+
+@media (max-width: 550px) {
+  .kt-table {
+    min-width: 390px;
+    font-size: .93em;
   }
+  .kt-header { padding: 10px 4px 3px 5px;}
+  .kt-title { font-size: 1.07rem;}
+  .kt-stats {
+    gap: 12px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .kt-stat { padding: 11px 10px; min-width: 80px;}
+  .kt-controls { padding: 9px 5px 0 5px; }
+  .kt-footer { padding: 8px; }
+}
+
+/* Remove default outline for mouse, retain for keyboard/tab */
+.kt-table th:focus {
+  outline: 2px solid var(--primary);
 }
